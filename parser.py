@@ -43,7 +43,10 @@ def parse_ankets():
 			headers = {'User-Agent': 'Mozilla/5.0'}
 			soup = BeautifulSoup(requests.get(anket, headers=headers).content, "lxml")
 			d["ФИО"] = soup.find("h1").text
-			d["Агенство"] = soup.find("img", {"data-testid":"agent-broker-image"}).findParent().findParent().findParent().findParent().findAll("span")[-1].text
+			try:
+				d["Агенство"] = soup.find("img", {"data-testid":"agent-broker-image"}).findParent().findParent().findParent().findParent().findAll("span")[-1].text
+			except:
+				d["Агенство"] = soup.find("a", string="About Company").findParent().findAll("span")[-1].text
 			d["Национальность"] = soup.find("span", {"style":"box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative;max-width:100%"}).findParent().text.replace("Nationality:", "")
 			d["Языки"] = soup.find("span", {"style":"box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative;max-width:100%"}).findParent().findParent().findAll("div")[-1].findAll("span")[-1].text
 			d["whatsapp"] = soup.find("a", {"data-testid":"whatsapp-btn"}).get("href")
@@ -62,7 +65,8 @@ def main():
 		os.mkdir("cache")
 	if not os.path.isdir("out"):
 		os.mkdir("out")
-	parse_pages()
+	if not os.path.exists(os.path.abspath("cache/urls.txt")):
+		parse_pages()
 	parse_ankets()
 
 if __name__ == '__main__':
