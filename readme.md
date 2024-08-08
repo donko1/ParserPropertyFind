@@ -15,11 +15,11 @@
         * Можно щелкнуть правой кнопкой мыши по папке и выбрать "Открыть в терминале".
         * Или используйте комбинацию клавиш Win + R, введите cmd и перейдите к папке проекта с помощью команды cd путь\до\проекта.
     * Выполните следующие команды:
-                pip install virtualenv
-        python -m venv venv
-        .\venv\Scripts\activate.bat
-        pip install -r requirements.txt
-        python parser.py 
+        - pip install virtualenv
+        - python -m venv venv
+        - .\venv\Scripts\activate.bat
+        - pip install -r requirements.txt
+        - python parser.py 
         
 
 3. Запуск проекта:
@@ -32,19 +32,19 @@
 
 1. Установка зависимостей:
     * Откройте терминал и выполните следующие команды:
-                sudo apt update && sudo apt upgrade -y
-        sudo apt install python3-pip -y
-        sudo apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config libssl-dev libffi-dev 
-        sudo apt install python3-venv -y
+        - sudo apt update && sudo apt upgrade -y
+        - sudo apt install python3-pip -y
+        - sudo apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config libssl-dev libffi-dev 
+        - sudo apt install python3-venv -y
         
 
 2. Создание виртуального окружения:
     * Перейдите в папку проекта: cd path/to/project
     * Выполните следующие команды:
-                python3 -m venv venv
-        source venv/bin/activate
-        pip install -r requirements.txt
-        python3 parser.py 
+        - python3 -m venv venv
+        - source venv/bin/activate
+        - pip install -r requirements.txt
+        - python3 parser.py 
         
 
 3. Запуск проекта:
@@ -55,6 +55,5 @@
 
 Важно: 
 * Замените path/to/project на фактический путь к вашей папке проекта.
-* Если у вас возникли проблемы с установкой или запуском проекта, обратитесь к документации Python или поищите информацию в интернете.
 
 Приятного использования!
