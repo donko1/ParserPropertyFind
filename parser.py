@@ -58,7 +58,11 @@ def parse_ankets():
 
 
 def main():
-	# parse_pages()
+	if not os.path.isdir("cache"):
+		os.mkdir("cache")
+	if not os.path.isdir("out"):
+		os.mkdir("out")
+	parse_pages()
 	parse_ankets()
 
 if __name__ == '__main__':
