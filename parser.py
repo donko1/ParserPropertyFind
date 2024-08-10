@@ -38,20 +38,21 @@ def parse_ankets():
 		ankets = f.read().split("\n")
 	try:
 		for anket in ankets:
-			print(f"Парсю {anket}")
-			d = {}
-			headers = {'User-Agent': 'Mozilla/5.0'}
-			soup = BeautifulSoup(requests.get(anket, headers=headers).content, "lxml")
-			d["ФИО"] = soup.find("h1").text
-			try:
-				d["Агенство"] = soup.find("img", {"data-testid":"agent-broker-image"}).findParent().findParent().findParent().findParent().findAll("span")[-1].text
-			except:
-				d["Агенство"] = soup.find("a", string="About Company").findParent().findAll("span")[-1].text
-			d["Национальность"] = soup.find("span", {"style":"box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative;max-width:100%"}).findParent().text.replace("Nationality:", "")
-			d["Языки"] = soup.find("span", {"style":"box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative;max-width:100%"}).findParent().findParent().findAll("div")[-1].findAll("span")[-1].text
-			d["whatsapp"] = soup.find("a", {"data-testid":"whatsapp-btn"}).get("href")
-			d["телефон"] = soup.find("a", {"data-testid":"phone-btn"}).get("href")
-			out.append(d)
+			if anket.strip() != "":
+				print(f"Парсю {anket}")
+				d = {}
+				headers = {'User-Agent': 'Mozilla/5.0'}
+				soup = BeautifulSoup(requests.get(anket, headers=headers).content, "lxml")
+				d["ФИО"] = soup.find("h1").text
+				try:
+					d["Агенство"] = soup.find("img", {"data-testid":"agent-broker-image"}).findParent().findParent().findParent().findParent().findAll("span")[-1].text
+				except:
+					d["Агенство"] = soup.find("a", string="About Company").findParent().findAll("span")[-1].text
+				d["Национальность"] = soup.find("span", {"style":"box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative;max-width:100%"}).findParent().text.replace("Nationality:", "")
+				d["Языки"] = soup.find("span", {"style":"box-sizing:border-box;display:inline-block;overflow:hidden;width:initial;height:initial;background:none;opacity:1;border:0;margin:0;padding:0;position:relative;max-width:100%"}).findParent().findParent().findAll("div")[-1].findAll("span")[-1].text
+				d["whatsapp"] = soup.find("a", {"data-testid":"whatsapp-btn"}).get("href")
+				d["телефон"] = soup.find("a", {"data-testid":"phone-btn"}).get("href")
+				out.append(d)
 	except KeyboardInterrupt:
 		print("Я остановлен")
 	finally:
